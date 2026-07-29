@@ -7,4 +7,4 @@ Route::get('/', fn() => to_route('tickets.create'))
 ->name('home');
 
 Route::resource('tickets', TicketController::class)
-->only(['create', 'store']);
+->only(['create', 'store', 'show']);

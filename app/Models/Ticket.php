@@ -8,6 +8,7 @@ use App\Models\Traits\HasTrackingCode;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 /**
  * @property int $id
@@ -46,16 +47,22 @@ class Ticket extends Model
         'status'
     ];
 
-    public function uniqueIds(): array 
-    {
-        return ['uuid'];
-    }
-
     protected function casts(): array
     {
         return [
             'category' => TicketCategory::class,
             'status' => TicketStatus::class
         ];
+    }
+
+    public function uniqueIds(): array 
+    {
+        return ['uuid'];
+    }
+
+    #[Override]
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
     }
 }

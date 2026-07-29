@@ -14,7 +14,7 @@ class TicketController extends Controller
      */
     public function index(): View
     {
-        return view('ticket.create');
+        return view('tickets.create');
     }
 
     /**
@@ -22,7 +22,7 @@ class TicketController extends Controller
      */
     public function create(): View
     {
-        return view('ticket.create');
+        return view('tickets.create');
     }
 
     /**
@@ -37,15 +37,17 @@ class TicketController extends Controller
             'description' => $validated['description']
         ]);
 
-        return redirect()->route('home');
+        return redirect()->route('tickets.show', $ticket);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $uuid): View
     {
-        //
+        $ticket = Ticket::whereUuid($uuid)->firstOrFail();
+
+        return view('tickets.show', compact('ticket'));
     }
 
     /**
