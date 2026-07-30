@@ -6,7 +6,7 @@
     <title>{{ isset($title) ? $title . ' - Ticket Tracker' : 'Ticket Tracker' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body class="min-h-screen flex flex-col">
     <!-- Navigation Bar -->
     <header class="navbar">
         <a href="{{ route('home') }}" class="logo">

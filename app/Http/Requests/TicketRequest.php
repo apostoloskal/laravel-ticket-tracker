@@ -25,6 +25,7 @@ class TicketRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'min:1', 'max:255'],
             'description' => ['required', 'string', 'min:1', 'max:5000'],
+            'email' => ['required', 'email'],
             'attachments' => ['nullable', 'array', 'max:5'],
             'attachments.*' => [
                 'file',

@@ -32,6 +32,10 @@ use Override;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereTrackingCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereUuid($value)
+ * @property string $email
+ * @property int|null $employee_profile_id
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereEmployeeProfileId($value)
  * @mixin \Eloquent
  */
 class Ticket extends Model
@@ -44,7 +48,9 @@ class Ticket extends Model
         'title',
         'description',
         'category',
-        'status'
+        'status',
+        'email',
+        'employee_profile_id'
     ];
 
     protected function casts(): array
@@ -53,6 +59,11 @@ class Ticket extends Model
             'category' => TicketCategory::class,
             'status' => TicketStatus::class
         ];
+    }
+
+    public function assignedEmployee()
+    {
+        return $this->belongsTo(EmployeeProfile::class, 'employee_profile_id');
     }
 
     public function uniqueIds(): array 

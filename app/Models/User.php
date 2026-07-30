@@ -38,6 +38,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string $role
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRole($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUsername($value)
+ * @property-read \App\Models\EmployeeProfile|null $employeeProfile
  * @mixin \Eloquent
  */
 #[Fillable(['username', 'email', 'password', 'role'])]
@@ -59,5 +60,10 @@ class User extends Authenticatable
             'password' => 'hashed',
             'role' => UserRole::class
         ];
+    }
+
+    public function employeeProfile()
+    {
+        return $this->hasOne(EmployeeProfile::class);
     }
 }

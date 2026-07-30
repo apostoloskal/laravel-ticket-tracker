@@ -34,7 +34,8 @@ class TicketController extends Controller
 
         $ticket = Ticket::create([
             'title' => $validated['title'],
-            'description' => $validated['description']
+            'description' => $validated['description'],
+            'email' => $validated['email']
         ]);
 
         if($request->hasFile('attachments')) {
