@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\StoreTicketCommentController;
 use App\Http\Controllers\TicketController;
-use App\Http\Controllers\TicketTrackController;
+use App\Http\Controllers\TrackTicketController;
 use Illuminate\Support\Facades\Route;
 
 //Home
@@ -18,10 +19,14 @@ Route::post('/login', LoginController::class);
 Route::post('/logout', LogoutController::class)
 ->name('logout');
 
+//Ticket comment
+Route::post('/tickets/{ticket}/comment', StoreTicketCommentController::class)
+->name('tickets.comment');
+
 //Tickets search/track
-Route::get('/tickets/track', TicketTrackController::class)
+Route::get('/tickets/track', TrackTicketController::class)
 ->name('tickets.track');
-Route::post('/tickets/track', TicketTrackController::class);
+Route::post('/tickets/track', TrackTicketController::class);
 
 //Tickets resource
 Route::resource('tickets', TicketController::class)

@@ -25,6 +25,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeProfile whereJobTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeProfile whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeProfile whereUserId($value)
+ * @property-read mixed $display_name
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Ticket> $tickets
+ * @property-read int|null $tickets_count
  * @mixin \Eloquent
  */
 class EmployeeProfile extends Model
@@ -41,6 +44,11 @@ class EmployeeProfile extends Model
     public function getDisplayNameAttribute()
     {
         return $this->full_name ?: $this->user->username;
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(TicketComment::class);
     }
 
     public function tickets()

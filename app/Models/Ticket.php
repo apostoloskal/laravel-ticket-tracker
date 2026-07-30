@@ -36,6 +36,7 @@ use Override;
  * @property int|null $employee_profile_id
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereEmployeeProfileId($value)
+ * @property-read \App\Models\EmployeeProfile|null $assignedEmployee
  * @mixin \Eloquent
  */
 class Ticket extends Model
@@ -59,6 +60,11 @@ class Ticket extends Model
             'category' => TicketCategory::class,
             'status' => TicketStatus::class
         ];
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(TicketComment::class)->latest();
     }
 
     public function assignedEmployee()

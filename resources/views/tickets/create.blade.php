@@ -144,7 +144,7 @@
                             <p class="pl-1">or drag and drop</p>
                         </div>
                         <p class="text-xs text-gray-500 dark:text-gray-400">
-                            PNG, JPG, PDF, DOC up to 10MB
+                            PNG, JPG, PDF, DOC up to 10MB each<br>(64MB total)
                         </p>
                     </div>
                 </div>

@@ -54,7 +54,8 @@ class TicketController extends Controller
      */
     public function show(string $uuid): View
     {
-        $ticket = Ticket::with('assignedEmployee.user')->whereUuid($uuid)->firstOrFail();
+        $ticket = Ticket::with(['assignedEmployee.user', 'comments.employeeProfile.user'])
+        ->whereUuid($uuid)->firstOrFail();
 
         return view('tickets.show', compact('ticket'));
     }

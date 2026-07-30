@@ -6,7 +6,7 @@ use App\Models\Ticket;
 use App\Rules\TicketTrackingCode;
 use Illuminate\Http\Request;
 
-class TicketTrackController extends Controller
+class TrackTicketController extends Controller
 {
     /**
      * Handle the incoming request.
