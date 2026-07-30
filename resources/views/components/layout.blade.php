@@ -12,6 +12,12 @@
         <a href="{{ route('home') }}" class="logo">
             Ticket<span>Tracker</span>
         </a>
+
+        <ul class="nav-links">
+            <li><a href="{{ route('tickets.create') }}">Create ticket</a></li>
+            <li><a href="{{ route('tickets.track') }}">Search ticket</a></li>
+        </ul>
+
         @auth
         <div class="flex items-center gap-4">
             <span class="text-sm font-medium text-slate-300">
@@ -27,7 +33,7 @@
         @endauth
         @guest
             <div class="auth-buttons">
-                <a href="{{ route('login-view') }}" class="btn btn-login">Log In</a>
+                <a href="{{ route('login') }}" class="btn btn-login">Log In</a>
             </div>
         @endguest
     </header>

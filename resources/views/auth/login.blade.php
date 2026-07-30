@@ -7,7 +7,7 @@
             <div class="card-header">
                 <h2>Login</h2>
             </div>
-            <form method="post" action={{ route('login-post') }} class="space-y-6">
+            <form method="post" action={{ route('login') }} class="space-y-6">
                 <div>
                     <label for="username" class="label">Username</label>
                     <input 
