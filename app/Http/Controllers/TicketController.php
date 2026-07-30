@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TicketCategory;
 use App\Http\Requests\TicketRequest;
 use App\Models\Ticket;
 use Illuminate\Http\RedirectResponse;
@@ -14,7 +15,7 @@ class TicketController extends Controller
      */
     public function index(): View
     {
-        return view('tickets.create');
+        return view('tickets.create', ['categories' => TicketCategory::cases()]);
     }
 
     /**
@@ -22,7 +23,7 @@ class TicketController extends Controller
      */
     public function create(): View
     {
-        return view('tickets.create');
+        return view('tickets.create', ['categories' => TicketCategory::cases()]);
     }
 
     /**
@@ -35,6 +36,7 @@ class TicketController extends Controller
         $ticket = Ticket::create([
             'title' => $validated['title'],
             'description' => $validated['description'],
+            'category' => $validated['category'],
             'email' => $validated['email']
         ]);
 
@@ -52,7 +54,7 @@ class TicketController extends Controller
      */
     public function show(string $uuid): View
     {
-        $ticket = Ticket::whereUuid($uuid)->firstOrFail();
+        $ticket = Ticket::with('assignedEmployee.user')->whereUuid($uuid)->firstOrFail();
 
         return view('tickets.show', compact('ticket'));
     }

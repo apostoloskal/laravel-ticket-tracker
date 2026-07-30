@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\TicketCategory;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class TicketRequest extends FormRequest
 {
@@ -25,6 +27,7 @@ class TicketRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'min:1', 'max:255'],
             'description' => ['required', 'string', 'min:1', 'max:5000'],
+            'category' => ['required', Rule::enum(TicketCategory::class)],
             'email' => ['required', 'email'],
             'attachments' => ['nullable', 'array', 'max:5'],
             'attachments.*' => [

@@ -38,6 +38,11 @@ class EmployeeProfile extends Model
         'department'
     ];
 
+    public function getDisplayNameAttribute()
+    {
+        return $this->full_name ?: $this->user->username;
+    }
+
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
