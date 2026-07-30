@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Override;
 
 class TicketRequest extends FormRequest
 {
@@ -26,6 +25,12 @@ class TicketRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'min:1', 'max:255'],
             'description' => ['required', 'string', 'min:1', 'max:5000'],
+            'attachments' => ['nullable', 'array', 'max:5'],
+            'attachments.*' => [
+                'file',
+                'mimes:png,jpg,pdf,doc,docx',
+                'max:10240' // 10 MB max file size
+            ]
         ];
     }
 }

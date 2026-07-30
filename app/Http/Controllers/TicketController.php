@@ -37,6 +37,12 @@ class TicketController extends Controller
             'description' => $validated['description']
         ]);
 
+        if($request->hasFile('attachments')) {
+            foreach($request->file('attachments') as $file) {
+                $file->store("tickets/{$ticket->uuid}");
+            }
+        }
+
         return redirect()->route('tickets.show', $ticket);
     }
 
