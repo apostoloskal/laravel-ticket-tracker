@@ -18,7 +18,7 @@
     /* --- NAVIGATION BAR --- */
     .navbar {
         @apply sticky top-0 z-50 flex items-center justify-between px-4 py-4 
-        bg-white border-b border-gray-200 shadow-sm sm:px-6 lg:px-8 
+        bg-zinc-200 border-b border-gray-200 shadow-sm sm:px-6 lg:px-8 
         dark:bg-gray-900 dark:border-gray-800;
     }
     /* Brand Logo */
@@ -65,7 +65,21 @@
     }
     .footer {
         @apply sticky z-50 flex items-center justify-between px-4 py-4 mt-auto
-        bg-white border-b border-gray-200 shadow-sm sm:px-6 lg:px-8 
+        bg-zinc-200 border-b border-gray-200 shadow-sm sm:px-6 lg:px-8 
         dark:bg-gray-900 dark:border-gray-800;
+    }
+    .dashboard-sidebar {
+        @apply flex flex-col w-64 min-h-[calc(100vh-250px)] px-4 py-8 shadow-sm 
+        bg-zinc-200 border-r border-gray-200 dark:bg-gray-900 dark:border-gray-800
+    }
+    .tickets-table {
+        @apply bg-zinc-200 dark:bg-gray-800 rounded-xl 
+        shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden
+    }
+    .tickets-table thead {
+        @apply bg-zinc-200 dark:bg-gray-900/50
+    }
+    .tickets-table tbody {
+        @apply divide-y divide-gray-200 dark:divide-gray-700 bg-gray-300 dark:bg-gray-800
     }
 }

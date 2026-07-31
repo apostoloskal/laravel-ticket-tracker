@@ -4,7 +4,7 @@
     </x-slot:title>
     
 
-    <div class="mt-2 max-w-3xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+    <div class="mt-2 max-w-3xl mx-auto p-6 bg-zinc-200 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
         <div class="mb-8">
             <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Submit a Support Ticket</h1>
             <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Please describe your issue in detail. Our team typically responds within 24 hours.</p>
@@ -124,7 +124,7 @@
                         $el.classList.remove('border-indigo-500', 'bg-indigo-50/5');
                         addFiles($event.dataTransfer.files);
                     "
-                    class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-lg hover:border-indigo-500 dark:hover:border-indigo-400 transition-colors duration-200 cursor-pointer">
+                    class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-400 dark:border-gray-600 border-dashed rounded-lg hover:border-indigo-500 dark:hover:border-indigo-400 transition-colors duration-200 cursor-pointer">
                     
                     <div class="space-y-1 text-center">
                         <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">

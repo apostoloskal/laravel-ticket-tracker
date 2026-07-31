@@ -1,4 +1,4 @@
-<aside class="flex flex-col w-64 min-h-[calc(100vh-250px)] px-4 py-8 shadow-sm bg-white border-r border-gray-200 dark:bg-gray-900 dark:border-gray-800">
+<aside class="dashboard-sidebar">
     <!-- Logo / Brand -->
     <div class="flex items-center justify-center mb-8">
         <h2 class="text-2xl font-bold text-gray-800 dark:text-white">

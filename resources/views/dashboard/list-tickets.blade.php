@@ -10,12 +10,12 @@
         </div>
 
         <!-- Table Wrapper -->
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div class="tickets-table">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     
                     <!-- Table Headers -->
-                    <thead class="bg-gray-50 dark:bg-gray-900/50">
+                    <thead>
                         <tr>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                                 Title
@@ -48,7 +48,7 @@
                     </thead>
 
                     <!-- Table Body -->
-                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
+                    <tbody>
                         @forelse($tickets as $ticket)
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200">
                                 <!-- Title -->
