@@ -1,5 +1,5 @@
 <!-- Navigation Bar -->
-<header class="navbar">
+<header class="navbar border-b border-slate-600">
     <a href="{{ route('home') }}" class="logo">
         Ticket<span>Tracker</span>
     </a>
@@ -12,7 +12,7 @@
     </ul>
     @auth
         <div class="flex items-center gap-4">
-            <span class="text-sm font-medium text-slate-300">
+            <span class="text-sm font-medium text-gray-600 dark:text-gray-400">
                 Hello, {{ auth()->user()->username }}!
             </span>
             <form method="POST" action="{{ route('logout') }}" class="inline">
