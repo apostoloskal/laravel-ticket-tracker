@@ -1,4 +1,4 @@
-<aside class="flex flex-col w-64 min-h-screen px-4 py-8 bg-white border-r border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+<aside class="flex flex-col w-64 min-h-[calc(100vh-250px)] px-4 py-8 bg-white border-r border-gray-200 dark:bg-gray-900 dark:border-gray-700">
     <!-- Logo / Brand -->
     <div class="flex items-center justify-center mb-8">
         <h2 class="text-2xl font-bold text-gray-800 dark:text-white">
@@ -29,17 +29,4 @@
             </a>
         @endif
     </nav>
-    <!-- User Profile / Logout (Optional Bottom Section) -->
-    <div class="mt-auto">
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="flex items-center w-full px-4 py-2.5 text-sm font-medium text-red-600 transition-colors duration-200 rounded-lg hover:bg-red-50 dark:text-red-400 dark:hover:bg-gray-800">
-                <!-- Heroicon: logout -->
-                <svg class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                </svg>
-                Log Out
-            </button>
-        </form>
-    </div>
 </aside>

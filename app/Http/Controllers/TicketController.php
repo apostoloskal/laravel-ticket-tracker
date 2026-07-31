@@ -18,7 +18,10 @@ class TicketController extends Controller
     {
         Gate::authorize('viewAny', Ticket::class);
 
-        return view('dashboard.list-tickets');
+        $tickets = Ticket::with(['assignedEmployee.user', 'comments.employeeProfile.user'])
+            ->get();
+
+        return view('dashboard.list-tickets', compact('tickets'));
     }
 
     /**
