@@ -11,14 +11,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', fn() => to_route('tickets.create'))
 ->name('home');
 
-//Login
-Route::get('/login', fn() => view('auth.login'))
-->name('login');
-Route::post('/login', LoginController::class);
-//Logout
-Route::post('/logout', LogoutController::class)
-->name('logout');
-
 //Ticket comment
 Route::post('/tickets/{ticket}/comment', StoreTicketCommentController::class)
 ->name('tickets.comment');
@@ -28,6 +20,28 @@ Route::get('/tickets/track', TrackTicketController::class)
 ->name('tickets.track');
 Route::post('/tickets/track', TrackTicketController::class);
 
-//Tickets resource
+
+//Tickets resource//
+//Requires Authentication
+Route::prefix('dashboard')
+->middleware(['auth'])
+->group(function() {
+    Route::get('/', fn() => to_route('tickets.index'));
+    Route::resource('tickets', TicketController::class)
+    ->only(['index', 'edit', 'update', 'destroy']);
+})
+->name('dashboard');
+
+//No Authentication
+Route::get('tickets', fn() => to_route('tickets.create'));
 Route::resource('tickets', TicketController::class)
 ->only(['create', 'store', 'show']);
+//----------------//
+
+//Login
+Route::get('/login', fn() => view('auth.login'))
+->name('login');
+Route::post('/login', LoginController::class);
+//Logout
+Route::post('/logout', LogoutController::class)
+->name('logout');

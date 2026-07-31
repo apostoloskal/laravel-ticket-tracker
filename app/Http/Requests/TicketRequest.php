@@ -14,7 +14,7 @@ class TicketRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return true; //TicketController is handling authorization
     }
 
     /**

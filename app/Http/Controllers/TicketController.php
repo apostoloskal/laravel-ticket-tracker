@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\TicketCategory;
 use App\Http\Requests\TicketRequest;
 use App\Models\Ticket;
+use Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -15,7 +16,9 @@ class TicketController extends Controller
      */
     public function index(): View
     {
-        return view('tickets.create', ['categories' => TicketCategory::cases()]);
+        Gate::authorize('viewAny', Ticket::class);
+
+        return view('dashboard.list-tickets');
     }
 
     /**
@@ -23,6 +26,8 @@ class TicketController extends Controller
      */
     public function create(): View
     {
+        Gate::authorize('create', Ticket::class);
+
         return view('tickets.create', ['categories' => TicketCategory::cases()]);
     }
 
@@ -31,6 +36,8 @@ class TicketController extends Controller
      */
     public function store(TicketRequest $request): RedirectResponse
     {
+        Gate::authorize('create', Ticket::class);
+
         $validated = $request->validated();
 
         $ticket = Ticket::create([
@@ -56,6 +63,8 @@ class TicketController extends Controller
     {
         $ticket = Ticket::with(['assignedEmployee.user', 'comments.employeeProfile.user'])
         ->whereUuid($uuid)->firstOrFail();
+
+        Gate::authorize('view', $ticket);
 
         return view('tickets.show', compact('ticket'));
     }
