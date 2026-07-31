@@ -19,7 +19,8 @@ class TicketController extends Controller
         Gate::authorize('viewAny', Ticket::class);
 
         $tickets = Ticket::with(['assignedEmployee.user', 'comments.employeeProfile.user'])
-            ->get();
+            ->latest()
+            ->simplePaginate(10);
 
         return view('dashboard.list-tickets', compact('tickets'));
     }
@@ -91,8 +92,12 @@ class TicketController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Ticket $ticket)
     {
-        //
+        Gate::authorize('delete', $ticket);
+
+        Ticket::destroy($ticket->id);
+
+        return back()->with('success', 'Ticket deleted successfully.');
     }
 }

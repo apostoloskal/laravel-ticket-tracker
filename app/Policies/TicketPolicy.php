@@ -50,7 +50,7 @@ class TicketPolicy
      */
     public function delete(User $user, Ticket $ticket): bool
     {
-        return false;
+        return $user->role === UserRole::E_ADMIN;
     }
 
     /**

@@ -30,6 +30,12 @@
                                 Assigned To
                             </th>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                Tracking Code
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                Uuid
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                                 Customer Email
                             </th>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
@@ -45,79 +51,91 @@
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
                         @forelse($tickets as $ticket)
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200">
-                                
                                 <!-- Title -->
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4">
                                     <div class="text-sm font-medium text-gray-900 dark:text-white">
                                         {{ $ticket->title }}
                                     </div>
                                 </td>
 
                                 <!-- Category -->
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4">
                                     <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">
                                         {{ $ticket->category }}
                                     </span>
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4">
                                     <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">
                                         {{ $ticket->status }}
                                     </span>
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">
-                                        @if($ticket->assignedEmployee)
-                                            <div class="flex items-center space-x-2">
-                                                <span class="font-medium">{{ $ticket->assignedEmployee->display_name }}</span>
-                                                @if($ticket->assignedEmployee->job_title)
-                                                    <span class="text-xs text-gray-500">({{ $ticket->assignedEmployee->job_title }})</span>
-                                                @endif
-                                            </div>
-                                        @else
-                                            <span class="text-gray-400 italic">Unassigned</span>
-                                        @endif
-                                    </span>
+                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
+                                    @if($ticket->assignedEmployee)
+                                        <div class="flex items-center space-x-2">
+                                            <span class="font-medium">{{ $ticket->assignedEmployee->display_name }}</span>
+                                            @if($ticket->assignedEmployee->job_title)
+                                                <span class="text-xs text-gray-500">({{ $ticket->assignedEmployee->job_title }})</span>
+                                            @endif
+                                        </div>
+                                    @else
+                                        <span class="text-gray-400 italic">Unassigned</span>
+                                    @endif
+                                </td>
+
+                                <td class="px-6 py-4">
+                                    <div class="text-sm font-medium text-gray-900 dark:text-white">
+                                        {{ $ticket->tracking_code }}
+                                    </div>
+                                </td>
+
+                                <td class="px-6 py-4">
+                                    <div class="max-w-37.5 truncate text-sm font-medium text-gray-900 dark:text-white">
+                                        {{ $ticket->uuid }}
+                                    </div>
                                 </td>
 
                                 <!-- Email -->
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">
+                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
                                     {{ $ticket->email }}
                                 </td>
 
                                 <!-- Date -->
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">
+                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
                                     {{ $ticket->created_at->format('M d, Y') }}
                                 </td>
 
                                 <!-- Actions (View & Delete) -->
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <td class="px-6 py-4 text-right text-sm font-medium">
                                     <div class="flex items-center justify-end space-x-4">
-                                        
                                         <!-- View Button -->
                                         <a href="{{ route('tickets.show', $ticket) }}" 
                                         class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors">
-                                            View
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                            </svg>
                                         </a>
-
-                                        <!-- Delete Button (Requires a Form) -->
-                                        <form action="{{ route('tickets.destroy', $ticket) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this ticket? This action cannot be undone.');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" 
-                                                    class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 transition-colors">
-                                                Delete
-                                            </button>
-                                        </form>
-
+                                        @if(auth()->user()->role === \App\Enums\UserRole::E_ADMIN)
+                                            <!-- Delete Button (Requires a Form) -->
+                                            <form action="{{ route('tickets.destroy', $ticket) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this ticket? This action cannot be undone.');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" 
+                                                        class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 transition-colors">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>
                         @empty
                             <!-- Empty State -->
                             <tr>
-                                <td colspan="7" class="px-6 py-12 text-center">
+                                <td colspan="9" class="px-6 py-12 text-center">
                                     <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                                     </svg>
@@ -130,6 +148,10 @@
                 </table>
             </div>
         </div>
+        @if(method_exists($tickets, 'links') && $tickets->hasPages())
+            <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50">
+                {{ $tickets->links() }}
+            </div>
+        @endif
     </div>
-
 </x-dashboard-layout>
