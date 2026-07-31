@@ -75,14 +75,6 @@
         transition: all 0.2s ease;
         font-size: 0.9rem;
     }
-    .btn-dashboard {
-        color: #ffffff;
-        background-color: #5555d4;
-        border: 1px sold transparent;
-    }
-    .btn-dashboard:hover {
-        background-color: rgb(85, 85, 212, 0.7);
-    }
     /* Login - Secondary Ghost Button */
     .btn-login {
         color: #ffffff;
@@ -93,61 +85,12 @@
         color: #3b82f6;
         background-color: rgba(59, 130, 246, 0.1);
     }
-    /* Register - Primary Solid Button */
-    .btn-register {
-        background-color: #3b82f6;
-        color: #ffffff;
-        border: 1px solid #3b82f6;
-        box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
-    }
-    .btn-register:hover {
-        background-color: #2563eb;
-        border-color: #2563eb;
-        transform: translateY(-1px);
-    }
-    /* --- HERO SECTION (To showcase the layout) --- */
-    .hero {
-        height: calc(100vh - 74px);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
-                    url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80');
-        background-size: cover;
-        background-position: center;
-        color: white;
-        padding: 0 1rem;
-    }
-    .hero h1 {
-        font-size: 3.5rem;
-        font-weight: 800;
-        margin-bottom: 1rem;
-        max-width: 800px;
-    }
-    .hero p {
-        font-size: 1.25rem;
-        color: #cbd5e1;
-        margin-bottom: 2rem;
-        max-width: 600px;
-    }
-    .card {
-        @apply max-w-md w-full bg-white rounded-xl shadow-lg border border-slate-100 p-8;
-    }
-    .card-header {
-        @apply text-center mb-8
-    }
-    .card-header h2 {
-        @apply text-2xl font-bold text-slate-900
-    }
     .label {
-        @apply block text-sm font-semibold text-slate-700
+        @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1
     }
     .input {
-        @apply w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 
-        focus:ring-blue-500 focus:border-blue-500 outline-none transition 
-        text-slate-800 placeholder:text-slate-400
+        @apply w-full rounded-lg px-3 py-2 text-gray-900 dark:text-white bg-white dark:bg-gray-900 border
+                shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200
     }
     .submit-btn {
         @apply w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 
@@ -157,5 +100,4 @@
     .form-input-error {
         @apply text-red-500 text-xs mt-1.5 font-medium
     }
-    
 }

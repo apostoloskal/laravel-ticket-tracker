@@ -1,5 +1,6 @@
 <x-dashboard-layout>
-
-    <p>test</p>
+    <x-slot:title>
+        Dashboard
+    </x-slot:title>
 
 </x-dashboard-layout>

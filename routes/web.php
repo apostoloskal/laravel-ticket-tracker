@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterEmployeeController;
 use App\Http\Controllers\StoreTicketCommentController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TrackTicketController;
@@ -26,11 +27,14 @@ Route::post('/tickets/track', TrackTicketController::class);
 Route::prefix('dashboard')
 ->middleware(['auth'])
 ->group(function() {
-    Route::get('/', fn() => to_route('tickets.index'));
+    Route::get('register-employee', fn() => view('dashboard.register-employee'))
+    ->name('register_employee');
+    Route::post('register-employee', RegisterEmployeeController::class);
+    Route::get('/', fn() => to_route('tickets.index'))
+    ->name('dashboard');
     Route::resource('tickets', TicketController::class)
     ->only(['index', 'edit', 'update', 'destroy']);
-})
-->name('dashboard');
+});
 
 //No Authentication
 Route::get('tickets', fn() => to_route('tickets.create'));
