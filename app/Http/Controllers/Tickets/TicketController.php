@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Tickets;
 
 use App\Enums\TicketCategory;
+use App\Enums\TicketStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TicketRequest;
 use App\Models\Ticket;
 use Gate;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class TicketController extends Controller
@@ -76,7 +79,7 @@ class TicketController extends Controller
 
         Gate::authorize('view', $ticket);
 
-        return view('tickets.show', compact('ticket'));
+        return view('tickets.show', ['ticket' => $ticket, 'statuses' => TicketStatus::cases(), 'categories' => TicketCategory::cases()]);
     }
 
     /**
@@ -90,9 +93,32 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TicketRequest $request, string $id)
+    public function update(Request $request, Ticket $ticket)
     {
-        //
+        Gate::authorize('update', $ticket);
+
+        $validated = $request->validate([
+            'status' => ['required', Rule::enum(TicketStatus::class)],
+            'category' => ['required', Rule::enum(TicketCategory::class)]
+        ]);
+
+        $ticket->update([
+            'status' => $validated['status'],
+            'category' => $validated['category']
+        ]);
+
+        return back()->with('success', 'Ticket properties updated successfully.');
+    }
+
+    public function assign(Request $request, Ticket $ticket)
+    {
+        Gate::authorize('assign', $ticket);
+
+        $ticket->update([
+            'employee_profile_id' => $request->user()->id
+        ]);
+
+        return back()->with('success', 'Ticket successfully assigned to you.');
     }
 
     /**

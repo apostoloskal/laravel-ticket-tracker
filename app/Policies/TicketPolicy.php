@@ -42,7 +42,20 @@ class TicketPolicy
      */
     public function update(User $user, Ticket $ticket): bool
     {
-        return false;
+        if ($user->role === UserRole::E_CUSTOMER) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function assign(User $user, Ticket $ticket): bool
+    {
+        if ($user->role === UserRole::E_CUSTOMER) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

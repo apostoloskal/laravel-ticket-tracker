@@ -33,7 +33,11 @@ Route::prefix('dashboard')
     Route::get('/', fn() => to_route('tickets.index'))
     ->name('dashboard');
     Route::resource('tickets', TicketController::class)
-    ->only(['index', 'edit', 'update', 'destroy']);
+    ->only(['index', 'destroy']);
+    Route::patch('tickets/{ticket}', [TicketController::class, 'update'])
+    ->name('tickets.update');
+    Route::patch('tickets/{ticket}/assign', [TicketController::class, 'assign'])
+    ->name('tickets.assign');
 });
 
 //No Authentication
