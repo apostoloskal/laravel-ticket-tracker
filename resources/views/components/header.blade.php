@@ -17,7 +17,7 @@
             </span>
             <form method="POST" action="{{ route('logout') }}" class="inline">
                 @csrf
-                <button type="submit" class="flex items-center w-full px-4 py-2.5 text-sm font-medium text-red-600 transition-colors duration-200 rounded-lg hover:bg-red-50 dark:text-red-400 dark:hover:bg-gray-800">
+                <button type="submit" class="flex items-center w-full px-4 py-2.5 text-sm font-medium text-red-600 transition-colors duration-200 rounded-lg hover:bg-red-50 dark:text-red-400 dark:hover:bg-gray-800 cursor-pointer">
                     <!-- Heroicon: logout -->
                     <svg class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

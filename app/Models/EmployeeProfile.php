@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read mixed $display_name
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Ticket> $tickets
  * @property-read int|null $tickets_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TicketComment> $comments
+ * @property-read int|null $comments_count
  * @mixin \Eloquent
  */
 class EmployeeProfile extends Model

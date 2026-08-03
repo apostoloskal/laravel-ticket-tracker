@@ -20,6 +20,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TicketComment whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TicketComment whereTicketId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TicketComment whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Attachment> $attachments
+ * @property-read int|null $attachments_count
+ * @property-read \App\Models\EmployeeProfile|null $employeeProfile
+ * @property-read \App\Models\Ticket $ticket
  * @mixin \Eloquent
  */
 class TicketComment extends Model
@@ -29,6 +33,10 @@ class TicketComment extends Model
         'employee_profile_id',
         'content'
     ];
+
+    public function attachments() {
+        return $this->morphMany(Attachment::class, 'attachable');
+    }
 
     public function ticket()
     {

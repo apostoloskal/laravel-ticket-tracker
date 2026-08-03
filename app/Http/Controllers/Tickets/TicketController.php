@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Tickets;
 
 use App\Enums\TicketCategory;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\TicketRequest;
 use App\Models\Ticket;
 use Gate;
@@ -53,7 +54,12 @@ class TicketController extends Controller
 
         if($request->hasFile('attachments')) {
             foreach($request->file('attachments') as $file) {
-                $file->store("tickets/{$ticket->uuid}");
+                $fileName = $file->getClientOriginalName();
+                $path = $file->store('attachments', 'public');
+                $ticket->attachments()->create([
+                    'file_name' => $fileName,
+                    'file_path' => $path
+                ]);
             }
         }
 

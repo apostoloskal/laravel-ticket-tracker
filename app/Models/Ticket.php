@@ -37,6 +37,10 @@ use Override;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Ticket whereEmployeeProfileId($value)
  * @property-read \App\Models\EmployeeProfile|null $assignedEmployee
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Attachment> $attachments
+ * @property-read int|null $attachments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TicketComment> $comments
+ * @property-read int|null $comments_count
  * @mixin \Eloquent
  */
 class Ticket extends Model
@@ -60,6 +64,10 @@ class Ticket extends Model
             'category' => TicketCategory::class,
             'status' => TicketStatus::class
         ];
+    }
+
+    public function attachments() {
+        return $this->morphMany(Attachment::class, 'attachable');
     }
 
     public function comments()

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Tickets;
 
+use App\Http\Controllers\Controller;
 use App\Models\Ticket;
 use App\Rules\TicketTrackingCode;
 use Illuminate\Http\Request;

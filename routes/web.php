@@ -3,9 +3,9 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterEmployeeController;
-use App\Http\Controllers\StoreTicketCommentController;
-use App\Http\Controllers\TicketController;
-use App\Http\Controllers\TrackTicketController;
+use App\Http\Controllers\Tickets\StoreCommentController;
+use App\Http\Controllers\Tickets\TicketController;
+use App\Http\Controllers\Tickets\TrackTicketController;
 use Illuminate\Support\Facades\Route;
 
 //Home
@@ -13,7 +13,7 @@ Route::get('/', fn() => to_route('tickets.create'))
 ->name('home');
 
 //Ticket comment
-Route::post('/tickets/{ticket}/comment', StoreTicketCommentController::class)
+Route::post('/tickets/{ticket}/comment', StoreCommentController::class)
 ->name('tickets.comment');
 
 //Tickets search/track
