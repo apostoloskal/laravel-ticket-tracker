@@ -1,4 +1,4 @@
-<x-layout>
+<x-dashboard-layout>
     <x-slot:title>
         Register Employee
     </x-slot:title>
@@ -138,4 +138,4 @@
             </form>
         </div>
     </div>
-</x-layout>
+</x-dashboard-layout>

@@ -21,6 +21,9 @@ class EmployeeController extends Controller
         Gate::authorize('viewAny', EmployeeProfile::class);
 
         $employees = EmployeeProfile::with('user')
+        ->whereHas('user', function ($query) {
+            $query->whereNot('role', UserRole::E_ADMIN->value);
+        })
         ->latest()
         ->paginate(10);
 
