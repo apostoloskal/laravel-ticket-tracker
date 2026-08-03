@@ -9,7 +9,7 @@
             <div class="flex w-full justify-center">
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Register Employee</h2>
             </div>
-            <form method="post" action="{{ route('register_employee') }}" class="space-y-6">
+            <form method="post" action="{{ route('employees.store') }}" class="space-y-6">
                 @csrf
                 <div class="space-y-4 pt-4">
                     <div>

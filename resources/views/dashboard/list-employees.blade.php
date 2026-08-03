@@ -1,11 +1,11 @@
 <x-dashboard-layout>
     <x-slot:title>
-        Tickets
+        Employees
     </x-slot:title>
     <div class="flex-1 flex flex-col">
         <div class="sm:flex sm:items-center sm:justify-between mb-6">
             <div class="w-full justify-center">
-                <h1 class="text-center text-2xl font-bold text-gray-900 dark:text-white">Tickets</h1>
+                <h1 class="text-center text-2xl font-bold text-gray-900 dark:text-white">Employees</h1>
             </div>
         </div>
 
@@ -18,28 +18,22 @@
                     <thead>
                         <tr>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Title
+                                Full Name
                             </th>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Category
+                                Job Title
                             </th>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Status
+                                Department
                             </th>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Assigned To
+                                Email
                             </th>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Tracking Code
+                                Username
                             </th>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Uuid
-                            </th>
-                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Customer Email
-                            </th>
-                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Created
+                                Joined
                             </th>
                             <th scope="col" class="px-6 py-4 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                                 Actions
@@ -49,98 +43,69 @@
 
                     <!-- Table Body -->
                     <tbody>
-                        @forelse($tickets as $ticket)
+                        @forelse($employees as $employee)
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200">
                                 <!-- Title -->
                                 <td class="px-6 py-4">
                                     <div class="text-sm font-medium text-gray-900 dark:text-white">
-                                        {{ $ticket->title }}
+                                        {{ $employee->full_name }}
                                     </div>
                                 </td>
 
                                 <!-- Category -->
                                 <td class="px-6 py-4">
                                     <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">
-                                        {{ $ticket->category }}
+                                        {{ $employee->job_title }}
                                     </span>
                                 </td>
 
                                 <td class="px-6 py-4">
                                     <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">
-                                        {{ $ticket->status }}
+                                        {{ $employee->department }}
                                     </span>
-                                </td>
-
-                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
-                                    @if($ticket->assignedEmployee)
-                                        <div class="flex items-center space-x-2">
-                                            <span class="font-medium">{{ $ticket->assignedEmployee->display_name }}</span>
-                                            @if($ticket->assignedEmployee->job_title)
-                                                <span class="text-xs text-gray-500">({{ $ticket->assignedEmployee->job_title }})</span>
-                                            @endif
-                                        </div>
-                                    @else
-                                        <span class="text-gray-400 italic">Unassigned</span>
-                                    @endif
                                 </td>
 
                                 <td class="px-6 py-4">
                                     <div class="text-sm font-medium text-gray-900 dark:text-white">
-                                        {{ $ticket->tracking_code }}
+                                        {{ $employee->user->email }}
                                     </div>
                                 </td>
 
                                 <td class="px-6 py-4">
                                     <div class="max-w-37.5 truncate text-sm font-medium text-gray-900 dark:text-white">
-                                        {{ $ticket->uuid }}
+                                        {{ $employee->user->username }}
                                     </div>
                                 </td>
-
-                                <!-- Email -->
-                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
-                                    {{ $ticket->email }}
-                                </td>
-
                                 <!-- Date -->
                                 <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
-                                    {{ $ticket->created_at->format('M d, Y') }}
+                                    {{ $employee->created_at->format('M d, Y') }}
                                 </td>
 
                                 <!-- Actions (View & Delete) -->
                                 <td class="px-6 py-4 text-right text-sm font-medium">
                                     <div class="flex items-center justify-end space-x-4">
-                                        <!-- View Button -->
-                                        <a href="{{ route('tickets.show', $ticket) }}" 
-                                        class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                                            </svg>
-                                        </a>
-                                        @if(auth()->user()->role === \App\Enums\UserRole::E_ADMIN)
-                                            <!-- Delete Button (Requires a Form) -->
-                                            <form action="{{ route('tickets.destroy', $ticket) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this ticket? This action cannot be undone.');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" 
-                                                        class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 transition-colors cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                                    </svg>
-                                                </button>
-                                            </form>
-                                        @endif
+                                        <form action="{{ route('employees.destroy', $employee) }}" method="POST" onsubmit="return confirm('Are you sure you want to remove this employee? This action cannot be undone.');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" 
+                                                    class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 transition-colors cursor-pointer">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
                         @empty
                             <!-- Empty State -->
                             <tr>
-                                <td colspan="9" class="px-6 py-12 text-center">
+                                <td colspan="7" class="px-6 py-12 text-center">
                                     <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                                     </svg>
-                                    <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No tickets found</h3>
-                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">There are currently no support tickets in the system.</p>
+                                    <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No employees found</h3>
+                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">There are currently no employees working at this company.</p>
                                 </td>
                             </tr>
                         @endforelse
@@ -148,9 +113,9 @@
                 </table>
             </div>
         </div>
-        @if(method_exists($tickets, 'links') && $tickets->hasPages())
+        @if(method_exists($employees, 'links') && $employees->hasPages())
             <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50">
-                {{ $tickets->links() }}
+                {{ $employees->links() }}
             </div>
         @endif
     </div>

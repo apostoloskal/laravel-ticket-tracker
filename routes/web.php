@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterEmployeeController;
+use App\Http\Controllers\Employees\EmployeeController;
 use App\Http\Controllers\Tickets\StoreCommentController;
 use App\Http\Controllers\Tickets\TicketController;
 use App\Http\Controllers\Tickets\TrackTicketController;
@@ -27,11 +28,12 @@ Route::post('/tickets/track', TrackTicketController::class);
 Route::prefix('dashboard')
 ->middleware(['auth'])
 ->group(function() {
-    Route::get('register-employee', fn() => view('dashboard.register-employee'))
-    ->name('register_employee');
-    Route::post('register-employee', RegisterEmployeeController::class);
+    Route::resource('employees', EmployeeController::class)
+    ->only(['index', 'create', 'store', 'destroy']);
+
     Route::get('/', fn() => to_route('tickets.index'))
     ->name('dashboard');
+    
     Route::resource('tickets', TicketController::class)
     ->only(['index', 'destroy']);
     Route::patch('tickets/{ticket}', [TicketController::class, 'update'])
