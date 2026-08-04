@@ -2,19 +2,78 @@
     <x-slot:title>
         Tickets
     </x-slot:title>
+    
     <div class="flex-1 flex flex-col">
+        <!-- Header -->
         <div class="sm:flex sm:items-center sm:justify-between mb-6">
             <div class="w-full justify-center">
                 <h1 class="text-center text-2xl font-bold text-gray-900 dark:text-white">Tickets</h1>
             </div>
         </div>
 
+        <!-- Filter Bar -->
+        <div class="mb-6 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+            <form method="GET" action="{{ route('tickets.index') }}" class="flex flex-col md:flex-row gap-4 items-end">
+                
+                <!-- Search Bar -->
+                <div class="flex-1 w-full">
+                    <label for="search" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Search Tickets</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <input type="text" name="search" id="search" value="{{ request('search') }}"
+                            class="block w-full pl-10 sm:text-sm rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-indigo-500 focus:border-indigo-500"
+                            placeholder="Tracking code or title...">
+                    </div>
+                </div>
+
+                <!-- Status Filter -->
+                <div class="w-full md:w-48">
+                    <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status</label>
+                    <select name="status" id="status" class="block w-full sm:text-sm rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="">All Statuses</option>
+                        @foreach($statuses as $status)
+                            <option value="{{ $status->value }}" @selected(request('status') === $status->value)>
+                                {{ ucfirst($status->value) }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="w-full md:w-48">
+                    <label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category</label>
+                    <select name="category" id="category" class="block w-full sm:text-sm rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="">All Categories</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->value }}" @selected(request('category') === $category->value)>
+                                {{ ucfirst($category->value) }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-2 w-full md:w-auto">
+                    <button type="submit" class="w-full md:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                        Apply
+                    </button>
+                    @if(request()->anyFilled(['search', 'status', 'category']))
+                        <a href="{{ route('tickets.index') }}" class="w-full md:w-auto inline-flex justify-center items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                            Clear
+                        </a>
+                    @endif
+                </div>
+            </form>
+        </div>
+
         <!-- Table Wrapper -->
         <div class="tickets-table">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    
-                    <!-- Table Headers -->
                     <thead>
                         <tr>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
@@ -46,8 +105,6 @@
                             </th>
                         </tr>
                     </thead>
-
-                    <!-- Table Body -->
                     <tbody>
                         @forelse($tickets as $ticket)
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200">
@@ -148,6 +205,7 @@
                 </table>
             </div>
         </div>
+        
         @if(method_exists($tickets, 'links') && $tickets->hasPages())
             <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50">
                 {{ $tickets->links() }}

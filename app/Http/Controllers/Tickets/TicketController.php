@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Tickets;
 
 use App\Enums\TicketCategory;
 use App\Enums\TicketStatus;
+use App\Filters\TicketFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TicketRequest;
 use App\Mail\TicketSubmitted;
@@ -20,15 +21,21 @@ class TicketController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request, TicketFilter $filters): View
     {
         Gate::authorize('viewAny', Ticket::class);
 
-        $tickets = Ticket::with(['assignedEmployee.user', 'comments.employeeProfile.user'])
-            ->latest()
-            ->simplePaginate(10);
+        $query = Ticket::with(['assignedEmployee.user'])->latest();
+        $query = $filters->apply($query, $request);
+        
+        $tickets = $query->paginate(10)->withQueryString();
 
-        return view('dashboard.list-tickets', compact('tickets'));
+        return view('dashboard.list-tickets', 
+        [
+            'tickets' => $tickets, 
+            'categories' => TicketCategory::cases(), 
+            'statuses' => TicketStatus::cases()
+        ]);
     }
 
     /**
