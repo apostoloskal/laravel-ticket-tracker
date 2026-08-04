@@ -6,10 +6,12 @@ use App\Enums\TicketCategory;
 use App\Enums\TicketStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TicketRequest;
+use App\Mail\TicketSubmitted;
 use App\Models\Ticket;
 use Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -65,6 +67,8 @@ class TicketController extends Controller
                 ]);
             }
         }
+
+        Mail::to($ticket->email)->send(new TicketSubmitted($ticket));
 
         return redirect()->route('tickets.show', $ticket);
     }
