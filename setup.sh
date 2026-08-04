@@ -13,12 +13,10 @@ sed -ri -e 's/APP_NAME=\w+/APP_NAME=TicketTracker/g' \
 
 php artisan key:generate
 
-php artisan migrate
-
-php artisan db:seed
+php artisan migrate --force --seed
 
 cd mailhog
-docker compose up
+docker compose up --detached
 cd ..
 
 php artisan storage:link

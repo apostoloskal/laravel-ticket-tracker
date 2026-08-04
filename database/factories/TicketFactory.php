@@ -20,6 +20,7 @@ class TicketFactory extends Factory
     public function definition(): array
     {
         return [
+            'tracking_code' => 'TKT-' . fake()->numberBetween(10000000000, 1999999999),
             'title' => fake()->sentence(),
             'description' => fake()->paragraphs(asText: true),
             'category' => fake()->randomElement(TicketCategory::cases()),
