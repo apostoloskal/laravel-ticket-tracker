@@ -28,11 +28,11 @@ Route::post('/tickets/track', TrackTicketController::class);
 Route::prefix('dashboard')
 ->middleware(['auth'])
 ->group(function() {
-    Route::resource('employees', EmployeeController::class)
-    ->only(['index', 'create', 'store', 'destroy']);
-
     Route::get('/', fn() => to_route('tickets.index'))
     ->name('dashboard');
+
+    Route::resource('employees', EmployeeController::class)
+    ->only(['index', 'create', 'store', 'destroy']);
     
     Route::resource('tickets', TicketController::class)
     ->only(['index', 'destroy']);

@@ -117,13 +117,13 @@
 
                                 <!-- Category -->
                                 <td class="px-6 py-4">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">
+                                    <span class="min-w-22 justify-center inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">
                                         {{ $ticket->category }}
                                     </span>
                                 </td>
 
                                 <td class="px-6 py-4">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">
+                                    <span class="min-w-22 justify-center inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">
                                         {{ $ticket->status }}
                                     </span>
                                 </td>
@@ -148,7 +148,7 @@
                                 </td>
 
                                 <td class="px-6 py-4">
-                                    <div class="max-w-37.5 truncate text-sm font-medium text-gray-900 dark:text-white">
+                                    <div class="max-w-32 truncate text-sm font-medium text-gray-900 dark:text-white">
                                         {{ $ticket->uuid }}
                                     </div>
                                 </td>
@@ -159,7 +159,7 @@
                                 </td>
 
                                 <!-- Date -->
-                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
+                                <td class="min-w-36 px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
                                     {{ $ticket->created_at->format('M d, Y') }}
                                 </td>
 
