@@ -16,7 +16,7 @@ php artisan key:generate
 php artisan migrate --force --seed
 
 cd mailhog
-docker compose up --detached
+docker compose up --detach
 cd ..
 
 php artisan storage:link
