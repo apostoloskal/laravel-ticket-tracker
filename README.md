@@ -57,4 +57,8 @@ composer run dev
 
 ## Note
 
-If file uploads fail even though they are small in size, you may need to configure your server's upload limits in the php.ini file.
+If file uploads fail even though they are small in size, you may need to configure your server's upload limits in the php.ini file. (If artisan migrate succeeded, there should be an admin account whom you can login as.)
+
+<ins>Admin User:</ins>
+Username: admin
+Password: admin
