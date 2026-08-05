@@ -40,12 +40,38 @@
                                 required
                                 autofocus
                                 placeholder="TKT-XXXXXXXXXX"
-                                class="w-full pl-10 rounded-lg px-3 py-2 text-gray-900 dark:text-white bg-white dark:bg-gray-900 border @error('tracking_code') border-red-500 focus:ring-red-500 focus:border-red-500 @else border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500 @enderror shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200"
+                                class="w-full pl-10 rounded-lg px-3 py-2 text-gray-900 dark:text-white bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200"
+                            >
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Your Email <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <!-- Search Icon inside the input -->
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M11.89 4.111a5.5 5.5 0 1 0 0 7.778.75.75 0 1 1 1.06 1.061A7 7 0 1 1 15 8a2.5 2.5 0 0 1-4.083 1.935A3.5 3.5 0 1 1 11.5 8a1 1 0 0 0 2 0 5.48 5.48 0 0 0-1.61-3.889ZM10 8a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z" clip-rule="evenodd" />
+                                </svg>
+
+
+                            </div>
+                            
+                            <input 
+                                type="email" 
+                                name="email" 
+                                id="email" 
+                                value="{{ old('email') }}"
+                                required
+                                placeholder="you@email.com"
+                                class="w-full pl-10 rounded-lg px-3 py-2 text-gray-900 dark:text-white bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200"
                             >
                         </div>
                         
                         <!-- Validation Error -->
-                        @error('tracking_code')
+                        @error('error')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
